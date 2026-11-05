@@ -1,0 +1,279 @@
+openapi: 3.0.3
+info:
+  title: Taxi Manager API
+  version: 1.0.0
+  description: API REST para gestão de frota de táxis, motoristas e viagens.
+servers:
+  - url: http://localhost:8080
+    description: Servidor Local de Desenvolvimento
+
+paths:
+  /motoristas:
+    get:
+      summary: Listar todos os motoristas
+      tags:
+        - Motoristas
+      responses:
+        '200':
+          description: Lista de motoristas obtida com sucesso.
+    post:
+      summary: Registar um novo motorista
+      tags:
+        - Motoristas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Motorista'
+      responses:
+        '201':
+          description: Motorista criado com sucesso.
+        '400':
+          description: Dados inválidos.
+        '409':
+          description: NIF ou licença já existem.
+
+  /taxis:
+    get:
+      summary: Listar todos os táxis da frota
+      tags:
+        - Táxis
+      responses:
+        '200':
+          description: Lista de veículos obtida.
+    post:
+      summary: Registar novo veículo na frota
+      tags:
+        - Táxis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Taxi'
+      responses:
+        '201':
+          description: Táxi registado com sucesso.
+
+  /viagens:
+    post:
+      summary: Registar/Iniciar uma nova viagem
+      tags:
+        - Viagens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Viagem'
+      responses:
+        '201':
+          description: Viagem registada com sucesso.
+
+components:
+  schemas:
+    Motorista:
+      type: object
+      required:
+        - nome
+        - nif
+        - genero
+        - anoNascimento
+        - morada
+        - numeroCartaConducao
+        - senhaAcesso
+      properties:
+        nome:
+          type: string
+          example: "Carlos Silva"
+        nif:
+          type: string
+          example: "123456789"
+        genero:
+          type: string
+          example: "Masculino"
+        anoNascimento:
+          type: integer
+          example: 1985
+        morada:
+          type: string
+          example: "Rua Principal, 123, Lisboa"
+        numeroCartaConducao:
+          type: string
+          example: "TVDE-123456"
+        senhaAcesso:
+          type: string
+          example: "secret123"
+
+    Taxi:
+      type: object
+      required:
+        - matricula
+        - marca
+        - modelo
+        - nivelConforto
+        - anoCompra
+        - tipoMotor
+      properties:
+        matricula:
+          type: string
+          example: "AA-00-AA"
+        marca:
+          type: string
+          example: "Toyota"
+        modelo:
+          type: string
+          example: "Prius"
+        nivelConforto:
+          type: string
+          example: "Executive"
+        anoCompra:
+          type: integer
+          example: 2022
+        tipoMotor:
+          type: string
+          example: "Híbrido"
+
+    Viagem:
+      type: object
+      required:
+        - taxiId
+        - motoristaId
+        - kmPercorridos
+        - numeroPessoas
+        - origem
+        - destino
+        - preco
+        - horaInicio
+        - horaFim
+        - estado
+      properties:
+        taxiId:
+          type: integer
+          format: int64
+          example: 1
+        motoristaId:
+          type: integer
+          format: int64
+          example: 2
+        kmPercorridos:
+          type: number
+          format: float
+          example: 12.5
+        numeroPessoas:
+          type: integer
+          example: 2
+        origem:
+          type: string
+          example: "Aeroporto de Lisboa"
+        destino:
+          type: string
+          example: "Marquês de Pombal"
+        preco:
+          type: number
+          format: double
+          example: 18.50
+        horaInicio:
+          type: string
+          format: date-time
+          example: "2026-03-30T14:00:00Z"
+        horaFim:
+          type: string
+          format: date-time
+          example: "2026-03-30T14:35:00Z"
+        estado:
+          type: string
+          example: "CONCLUIDA"
+
+    Turno:
+      type: object
+      required:
+        - horaInicio
+        - horaFim
+        - motoristaId
+        - taxiId
+      properties:
+        horaInicio:
+          type: string
+          format: date-time
+        horaFim:
+          type: string
+          format: date-time
+        motoristaId:
+          type: integer
+          format: int64
+        taxiId:
+          type: integer
+          format: int64
+
+    Fatura:
+      type: object
+      required:
+        - numeroSequencial
+        - nif
+        - generoCliente
+        - data
+      properties:
+        numeroSequencial:
+          type: string
+          example: "FT 2026/1"
+        nif:
+          type: string
+          example: "999999990"
+        generoCliente:
+          type: string
+          example: "Outro"
+        data:
+          type: string
+          format: date
+
+    Reabastecimento:
+      type: object
+      required:
+        - turnoId
+        - dataInicio
+        - dataFim
+        - quantidadeLitros
+        - valor
+        - kmTaxi
+        - tipoTaxi
+      properties:
+        turnoId:
+          type: integer
+          format: int64
+        dataInicio:
+          type: string
+          format: date-time
+        dataFim:
+          type: string
+          format: date-time
+        quantidadeLitros:
+          type: number
+          format: float
+          example: 45.2
+        valor:
+          type: number
+          format: double
+          example: 75.00
+        kmTaxi:
+          type: integer
+          example: 45200
+        tipoTaxi:
+          type: string
+          example: "Gasolina"
+
+    ConfiguracaoPreco:
+      type: object
+      required:
+        - precoBase
+        - precoPorKm
+      properties:
+        precoBase:
+          type: number
+          format: double
+          example: 3.25
+        precoPorKm:
+          type: number
+          format: double
+          example: 0.95
