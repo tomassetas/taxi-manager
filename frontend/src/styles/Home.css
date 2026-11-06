@@ -1,0 +1,189 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  color: #222;
+}
+
+.navbar {
+  height: 75px;
+  padding: 0 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+}
+
+.navbar h2 {
+  color: #222;
+}
+
+.login-btn, .main-btn {
+  background: #f5c400;
+  color: #222;
+  padding: 12px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  min-height: 480px;
+  padding: 70px 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #20252c;
+  color: white;
+}
+
+.hero-content {
+  max-width: 550px;
+}
+
+.tag {
+  color: #f5c400;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin: 25px 0;
+}
+
+.hero h1 span {
+  color: #f5c400;
+}
+
+.hero p {
+  color: #ccc;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.hero-icon {
+  font-size: 130px;
+}
+
+.features {
+  padding: 65px 10%;
+  text-align: center;
+}
+
+.features h2 {
+  margin-bottom: 35px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.feature-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px #0000000d;
+}
+
+.feature-card span {
+  font-size: 35px;
+}
+
+.feature-card h3 {
+  margin: 15px 0;
+}
+
+.feature-card p {
+  color: #777;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #20252c;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 380px;
+}
+
+.login-card h1 {
+  margin: 25px 0;
+}
+
+.login-card h2 {
+  margin-bottom: 10px;
+}
+
+.login-card p {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.login-card label {
+  display: block;
+  margin: 15px 0 8px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.login-card button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 13px;
+  background: #f5c400;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-link {
+  color: #555;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-icon {
+    font-size: 80px;
+  }
+}
