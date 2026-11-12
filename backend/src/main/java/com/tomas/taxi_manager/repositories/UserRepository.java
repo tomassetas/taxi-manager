@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
      Optional<User> findByKeycloakSubject(String keycloakSubject);
 
     boolean existsByNif(String nif);
+    
 }

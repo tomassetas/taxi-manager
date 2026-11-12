@@ -6,4 +6,10 @@ const keycloak = new Keycloak({
   clientId: import.meta.env.VITE_KEYCLOAK_CLIENT_ID, 
 });
 
+export const keycloakReady = keycloak.init({
+  onLoad: "check-sso",
+  pkceMethod: "S256",
+  checkLoginIframe: false,
+});
+
 export default keycloak;

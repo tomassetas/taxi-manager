@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import keycloak from "../auth/keycloak";
+import keycloak, { keycloakReady } from "../auth/keycloak";
 import "../styles/Home.css";
 
 function Login() {
   const [error, setError] = useState("");
-  const [apiResult, setApiResult] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    keycloakReady
+      .then(() => setAuthenticated(Boolean(keycloak.authenticated)))
+      .catch((loginError) => {
+        console.error("Keycloak initialization failed", loginError);
+        setError("Não foi possível inicializar a autenticação.");
+      });
+  }, []);
 
   async function handleLogin() {
     setError("");
 
     try {
+      await keycloakReady;
       await keycloak.login({ redirectUri: `${window.location.origin}/login` });
     } catch (loginError) {
       console.error("Keycloak login failed", loginError);
@@ -22,37 +32,11 @@ function Login() {
     setError("");
 
     try {
-      await keycloak.logout({
-        redirectUri: `${window.location.origin}/login`,
-      });
+      await keycloakReady;
+      await keycloak.logout({ redirectUri: `${window.location.origin}/login` });
     } catch (logoutError) {
       console.error("Keycloak logout failed", logoutError);
       setError("Não foi possível terminar a sessão. Tenta novamente.");
-    }
-  }
-
-  async function handleCheckApi() {
-    setError("");
-    setApiResult("");
-
-    try {
-      await keycloak.updateToken(30);
-
-      const response = await fetch("http://localhost:8080/api/me", {
-        headers: {
-          Authorization: `Bearer ${keycloak.token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`A API respondeu com erro ${response.status}`);
-      }
-
-      const data = await response.json();
-      setApiResult(JSON.stringify(data, null, 2));
-    } catch (apiError) {
-      console.error("API request failed", apiError);
-      setError("Não foi possível consultar a API. Confirma se o backend está ligado.");
     }
   }
 
@@ -64,27 +48,22 @@ function Login() {
         </Link>
 
         <h1>TaxiManager 🚕</h1>
-        <h2>Bem-vindo de volta!</h2>
-        {keycloak.authenticated ? (
+        <h2>Iniciar sessão</h2>
+        {authenticated ? (
           <>
             <p>
-              Sessão iniciada
+              Já tens sessão iniciada
               {keycloak.tokenParsed?.preferred_username
                 ? ` como ${keycloak.tokenParsed.preferred_username}`
-                : ""}
-              .
+                : ""}.
             </p>
-
-            <button type="button" onClick={handleCheckApi}>
-              Testar ligação à API
-            </button>
+            <Link to="/profile" className="main-btn">
+              Ver perfil
+            </Link>
             <button type="button" onClick={handleLogout}>
               Terminar sessão
             </button>
-
-            {apiResult && <pre>{apiResult}</pre>}
           </>
-
         ) : (
           <>
             <p>Inicia sessão na tua conta.</p>

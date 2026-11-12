@@ -8,7 +8,8 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_utilizador", discriminatorType = DiscriminatorType.STRING)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -23,8 +24,8 @@ public abstract class User {
     private String keycloakSubject;
 
     private String name;
-    private String gender;
-    private int birth_year;
     private String email;
+
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
 }

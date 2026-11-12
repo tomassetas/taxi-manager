@@ -8,9 +8,14 @@ function Home() {
       <nav className="navbar">
         <h2>🚕 TaxiManager</h2>
 
-        <Link to="/login" className="login-btn">
-          Iniciar Sessão
-        </Link>
+        <div className="nav-actions">
+          <Link to="/login" className="login-btn">
+            Iniciar sessão
+          </Link>
+          <Link to="/register" className="login-btn">
+            Criar conta
+          </Link>
+        </div>
       </nav>
 
       <main className="hero">

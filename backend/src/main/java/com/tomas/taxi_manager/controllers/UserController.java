@@ -7,18 +7,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import com.tomas.taxi_manager.models.User;
 import com.tomas.taxi_manager.services.UserProfileService;
-
-
-
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserProfileService userProfileService;
 
-    public UserController(UserProfileService userProfileService) {
-        this.userProfileService = userProfileService;
-    }
 
     @GetMapping("/api/me")
     public Map<String, String> currentUser(@AuthenticationPrincipal Jwt jwt) {
@@ -26,9 +22,9 @@ public class UserController {
 
         return Map.of(
                 "id", profile.getId().toString(),
-                "name", profile.getName() == null ? "" : profile.getName()
+                "name", profile.getName() == null ? "" : profile.getName(),
+                "tipo_utilizador", profile.getClass().getSimpleName().toUpperCase()
         );
     }
-
 
 }
