@@ -3,74 +3,20 @@ import "../styles/Home.css";
 
 function Home() {
   return (
-    <div className="home">
-
-      <nav className="navbar">
-        <h2>🚕 TaxiManager</h2>
-
-        <div className="nav-actions">
-          <Link to="/login" className="login-btn">
+    <main className="login-page">
+      <section className="login-card home-card">
+        <h1>TaxiManager 🚕</h1>
+        <p>Inicia sessão ou cria uma conta para continuar.</p>
+        <div className="home-actions">
+          <Link to="/login" className="main-btn">
             Iniciar sessão
           </Link>
-          <Link to="/register" className="login-btn">
+          <Link to="/register" className="secondary-btn">
             Criar conta
           </Link>
         </div>
-      </nav>
-
-      <main className="hero">
-        <div className="hero-content">
-          <span className="tag">GESTÃO INTELIGENTE DE TÁXIS</span>
-
-          <h1>
-            A gestão da tua frota,
-            <span> mais simples.</span>
-          </h1>
-
-          <p>
-            Gere motoristas, veículos, viagens e toda a operação
-            da tua empresa de táxis num único lugar.
-          </p>
-
-          <Link to="/login" className="main-btn">
-            Começar agora →
-          </Link>
-        </div>
-
-        <div className="hero-icon">
-          🚕
-        </div>
-      </main>
-
-      <section className="features">
-        <h2>Tudo o que precisas num só lugar</h2>
-
-        <div className="feature-grid">
-          <div className="feature-card">
-            <span>🚖</span>
-            <h3>Gestão de Táxis</h3>
-            <p>Organiza e acompanha os veículos da tua frota.</p>
-          </div>
-
-          <div className="feature-card">
-            <span>👨‍✈️</span>
-            <h3>Motoristas</h3>
-            <p>Gere motoristas, turnos e respetiva atividade.</p>
-          </div>
-
-          <div className="feature-card">
-            <span>📊</span>
-            <h3>Relatórios</h3>
-            <p>Acompanha viagens, pagamentos e resultados.</p>
-          </div>
-        </div>
       </section>
-
-      <footer>
-        © 2026 TaxiManager — Gestão de frotas simplificada.
-      </footer>
-
-    </div>
+    </main>
   );
 }
 

@@ -6,24 +6,24 @@ import java.util.Map;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import com.tomas.taxi_manager.models.User;
-import com.tomas.taxi_manager.services.UserProfileService;
+import com.tomas.taxi_manager.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserProfileService userProfileService;
+    private final UserService userService;
 
 
     @GetMapping("/api/me")
     public Map<String, String> currentUser(@AuthenticationPrincipal Jwt jwt) {
-        User profile = userProfileService.findByKeycloakSubject(jwt.getSubject());
+        User user = userService.findByKeycloakSubject(jwt.getSubject());
 
         return Map.of(
-                "id", profile.getId().toString(),
-                "name", profile.getName() == null ? "" : profile.getName(),
-                "tipo_utilizador", profile.getClass().getSimpleName().toUpperCase()
+                "id", user.getId().toString(),
+                "name", user.getName() == null ? "" : user.getName(),
+                "tipo_utilizador", user.getClass().getSimpleName().toUpperCase()
         );
     }
 

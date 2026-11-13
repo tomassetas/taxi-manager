@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import keycloak, { keycloakReady } from "../auth/keycloak";
 import "../styles/Home.css";
 
 function Login() {
   const [error, setError] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
+  const isManager = keycloak.tokenParsed?.realm_access?.roles?.includes("GESTOR");
 
   useEffect(() => {
     keycloakReady
@@ -15,6 +16,10 @@ function Login() {
         setError("Não foi possível inicializar a autenticação.");
       });
   }, []);
+
+  if (authenticated && isManager) {
+    return <Navigate to="/gestor" replace />;
+  }
 
   async function handleLogin() {
     setError("");

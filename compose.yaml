@@ -40,6 +40,11 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD no .env}
       KEYCLOAK_ISSUER_URI: http://localhost:8081/realms/taxi-manager
       KEYCLOAK_JWK_SET_URI: http://keycloak:8080/realms/taxi-manager/protocol/openid-connect/certs
+      KEYCLOAK_ADMIN_BASE_URL: http://keycloak:8080
+      KEYCLOAK_ADMIN_REALM: taxi-manager
+      KEYCLOAK_ADMIN_CLIENT_ID: taxi-manager-backend
+      KEYCLOAK_ADMIN_CLIENT_SECRET: ${KEYCLOAK_ADMIN_CLIENT_SECRET:?Define KEYCLOAK_ADMIN_CLIENT_SECRET in .env}
+
     ports:
       - "8080:8080"
     depends_on:

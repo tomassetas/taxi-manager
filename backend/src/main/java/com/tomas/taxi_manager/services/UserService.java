@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class UserProfileService {
+public class UserService {
 
     private final UserRepository userRepository;
 

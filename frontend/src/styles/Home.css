@@ -10,26 +10,9 @@ body {
   color: #222;
 }
 
-.navbar {
-  height: 75px;
-  padding: 0 8%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-}
-
-.navbar h2 {
-  color: #222;
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.login-btn, .main-btn {
+.main-btn,
+.secondary-btn {
+  display: block;
   background: #f5c400;
   color: #222;
   padding: 12px 22px;
@@ -38,84 +21,14 @@ body {
   font-weight: bold;
 }
 
-.hero {
-  min-height: 480px;
-  padding: 70px 10%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #20252c;
-  color: white;
-}
-
-.hero-content {
-  max-width: 550px;
-}
-
-.tag {
-  color: #f5c400;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.hero h1 {
-  font-size: 48px;
-  margin: 25px 0;
-}
-
-.hero h1 span {
-  color: #f5c400;
-}
-
-.hero p {
-  color: #ccc;
-  line-height: 1.7;
-  margin-bottom: 30px;
-}
-
-.hero-icon {
-  font-size: 130px;
-}
-
-.features {
-  padding: 65px 10%;
+.main-btn {
   text-align: center;
 }
 
-.features h2 {
-  margin-bottom: 35px;
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
-
-.feature-card {
+.secondary-btn {
   background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px #0000000d;
-}
-
-.feature-card span {
-  font-size: 35px;
-}
-
-.feature-card h3 {
-  margin: 15px 0;
-}
-
-.feature-card p {
-  color: #777;
-  line-height: 1.5;
-}
-
-footer {
+  border: 1px solid #222;
   text-align: center;
-  padding: 25px;
-  color: #777;
 }
 
 .login-page {
@@ -131,6 +44,53 @@ footer {
   padding: 40px;
   border-radius: 12px;
   width: 380px;
+}
+
+.home-card {
+  text-align: center;
+}
+
+.login-card.home-card h1 {
+  margin: 0 0 16px;
+}
+
+.login-card.home-card p {
+  margin-bottom: 24px;
+}
+
+.home-actions {
+  display: grid;
+  gap: 12px;
+}
+
+.manager-dashboard {
+  width: min(680px, calc(100% - 32px));
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+
+.manager-actions {
+  display: grid;
+  gap: 12px;
+}
+
+.manager-action {
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.manager-action h3 {
+  margin-bottom: 8px;
+}
+
+.manager-action p {
+  margin-bottom: 8px;
+}
+
+.manager-action span {
+  color: #777;
+  font-size: 0.9rem;
 }
 
 .login-card h1 {
@@ -175,21 +135,7 @@ footer {
 }
 
 @media (max-width: 700px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    gap: 40px;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-icon {
-    font-size: 80px;
+  .login-card {
+    width: min(380px, calc(100% - 32px));
   }
 }
