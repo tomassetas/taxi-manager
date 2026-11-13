@@ -118,7 +118,8 @@ public class KeycloakAdminService {
     public String createUserAccount(
             String firstName,
             String lastName,
-            String email) {
+            String email,
+            String roleName){
         String accessToken = requestAccessToken();
 
         Map<String, Object> userRepresentation =
@@ -128,7 +129,10 @@ public class KeycloakAdminService {
                 sendCreateUserRequest(accessToken, userRepresentation);
 
         URI location = response.getHeaders().getLocation();
-        return extractKeycloakSubject(location);
+        String keycloakSubject = extractKeycloakSubject(location);
+        assignRealmRoleToUser(accessToken, keycloakSubject, roleName);
+
+        return keycloakSubject;
     }
 
     private Map<?, ?> getRealmRoleRepresentation(
